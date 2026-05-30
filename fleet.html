@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PackWise — Fleet Database</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/fleet.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="logo">Pack<span>Wise</span></div>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Dashboard</a>
+        <a href="fleet.html" class="nav-link active">Fleet Database</a>
+        <a href="visualize.html" class="nav-link">3D Visual</a>
+        <a href="guide.html" class="nav-link">Loading Guide</a>
+      </nav>
+
+      <div id="sidebarUser" class="sidebar-user"></div>
+      <button class="sidebar-logout" onclick="logout()">Logout</button>
+    </aside>
+
+    <main class="main-content">
+      <header class="page-title">
+        <div>
+          <div class="badge">Logistics manager setting</div>
+          <h1>Fleet database</h1>
+          <p>Manage internal truck specifications used by the PackWise optimization engine.</p>
+        </div>
+
+        <button class="btn btn-primary" onclick="goTo('session.html')">
+          Use Vehicle Data
+        </button>
+      </header>
+
+      <section class="fleet-layout">
+        <div class="card fleet-table-card">
+          <div class="section-head">
+            <h3>Vehicle specifications</h3>
+            <p>These dimensions are used as container boundaries for 3D Bin Packing.</p>
+          </div>
+
+          <div class="table-wrap">
+            <table class="fleet-table">
+              <thead>
+                <tr>
+                  <th>Vehicle</th>
+                  <th>Type</th>
+                  <th>Length</th>
+                  <th>Width</th>
+                  <th>Height</th>
+                  <th>Volume</th>
+                  <th>Max Load</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="fleetTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="fleet-side">
+          <div class="card fleet-card">
+            <div class="section-head">
+              <h3>Database role</h3>
+              <p>Why fleet data matters.</p>
+            </div>
+
+            <div class="fleet-note">
+              Vehicle dimensions define the safe loading boundary. PackWise uses this data to calculate whether each cargo item fits inside the selected truck without overlap or boundary violation.
+            </div>
+          </div>
+
+          <div class="card fleet-card">
+            <div class="section-head">
+              <h3>Production database plan</h3>
+              <p>PostgreSQL-ready structure.</p>
+            </div>
+
+            <div class="schema-list">
+              <div>
+                <strong>vehicles</strong>
+                <span>id, name, type, length, width, height, max_weight</span>
+              </div>
+
+              <div>
+                <strong>loading_sessions</strong>
+                <span>shipment_id, destination, vehicle_id, utilization, created_by</span>
+              </div>
+
+              <div>
+                <strong>cargo_items</strong>
+                <span>session_id, name, dimensions, weight, position, rotation</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card fleet-card">
+            <div class="section-head">
+              <h3>AI engine dependency</h3>
+              <p>Connected modules.</p>
+            </div>
+
+            <div class="dependency-flow">
+              <span>Fleet database</span>
+              <span>↓</span>
+              <span>Optimization engine</span>
+              <span>↓</span>
+              <span>3D visualization + loading guide</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <script src="data/fleet.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    protectPage(["manager"]);
+    renderSidebarUser();
+  </script>
+  <script src="js/fleet.js"></script>
+</body>
+</html>

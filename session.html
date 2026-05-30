@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>PackWise — New Loading Session</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/session.css">
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="logo">Pack<span>Wise</span></div>
+
+      <nav id="navMenu" class="nav-menu"></nav>
+
+      <div id="sidebarUser" class="sidebar-user"></div>
+
+      <button class="sidebar-logout" onclick="logout()">Logout</button>
+    </aside>
+
+    <main class="main-content">
+      <header class="page-title">
+        <div>
+          <div class="badge">Warehouse operator workspace</div>
+          <h1>Create loading session</h1>
+          <p>Enter shipment details, item dimensions, weight, and vehicle selection. PackWise will calculate the most efficient loading arrangement.</p>
+        </div>
+      </header>
+
+      <section class="session-layout">
+        <div class="left-panel">
+          <div class="card form-card">
+            <div class="section-head">
+              <h3>Shipment information</h3>
+              <p>Basic operational data for this loading job.</p>
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label>Shipment ID</label>
+                <input type="text" id="shipmentId" placeholder="KL-2026-001">
+              </div>
+
+              <div class="field">
+                <label>Destination</label>
+                <input type="text" id="destination" placeholder="Jakarta Distribution Center">
+              </div>
+
+              <div class="field">
+                <label>Priority</label>
+                <select id="priority">
+                  <option value="Normal">Normal</option>
+                  <option value="High">High</option>
+                  <option value="Urgent">Urgent</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label>Route Type</label>
+                <select id="routeType">
+                  <option value="Urban Delivery">Urban Delivery</option>
+                  <option value="Intercity Delivery">Intercity Delivery</option>
+                  <option value="Retail Replenishment">Retail Replenishment</option>
+                  <option value="Industrial Delivery">Industrial Delivery</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="card form-card">
+            <div class="section-head">
+              <h3>Vehicle selection</h3>
+              <p>Select the truck that will be used for this shipment.</p>
+            </div>
+
+            <div id="vehicleGrid" class="vehicle-grid"></div>
+          </div>
+
+          <div class="card form-card">
+            <div class="section-head">
+              <h3>Add from product database</h3>
+              <p>Select an item by SKU. Dimensions and weight will be filled automatically from the product database.</p>
+            </div>
+
+            <div class="sku-form">
+              <div class="field sku-select-field">
+                <label>Product / SKU</label>
+                <select id="productSelect" onchange="previewSelectedProduct()"></select>
+              </div>
+
+              <div class="field">
+                <label>Quantity</label>
+                <input type="number" id="productQty" min="1" step="1" value="1">
+              </div>
+
+              <button class="btn btn-primary" onclick="addProductFromDatabase()">
+                Add from Product DB
+              </button>
+            </div>
+
+            <div id="productPreview" class="product-preview">
+              Select a product to preview its dimensions.
+            </div>
+          </div>
+
+          <div class="card form-card">
+            <div class="section-head section-head-row">
+              <div>
+                <h3>Add cargo item</h3>
+                <p>Input actual item dimensions in meters and weight in kilograms.</p>
+              </div>
+
+              <button class="btn btn-ghost" onclick="loadSampleCargo()">
+                Load sample cargo
+              </button>
+            </div>
+
+            <div class="item-form">
+              <div class="field item-name">
+                <label>Item name</label>
+                <input type="text" id="itemName" placeholder="Pallet A / Box B">
+              </div>
+
+              <div class="field">
+                <label>Length</label>
+                <input type="number" id="itemLength" min="0.01" step="0.01" placeholder="1.20">
+              </div>
+
+              <div class="field">
+                <label>Width</label>
+                <input type="number" id="itemWidth" min="0.01" step="0.01" placeholder="0.80">
+              </div>
+
+              <div class="field">
+                <label>Height</label>
+                <input type="number" id="itemHeight" min="0.01" step="0.01" placeholder="0.60">
+              </div>
+
+              <div class="field">
+                <label>Weight</label>
+                <input type="number" id="itemWeight" min="1" step="1" placeholder="120">
+              </div>
+
+              <button class="btn btn-primary" onclick="addCargoItem()">
+                Add item
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-panel">
+          <div class="card engine-card">
+            <div class="section-head">
+              <h3>AI optimization engine</h3>
+              <p>Two-phase cargo arrangement workflow.</p>
+            </div>
+
+            <div class="engine-flow">
+              <div class="engine-step active">
+                <div class="engine-dot">1</div>
+                <div>
+                  <strong>First Fit Decreasing</strong>
+                  <span>Sorts cargo by volume and creates the first valid arrangement.</span>
+                </div>
+              </div>
+
+              <div class="engine-step">
+                <div class="engine-dot">2</div>
+                <div>
+                  <strong>Genetic refinement</strong>
+                  <span>Tests candidate rotations and placement order to improve utilization.</span>
+                </div>
+              </div>
+
+              <div class="engine-step">
+                <div class="engine-dot">3</div>
+                <div>
+                  <strong>Constraint validation</strong>
+                  <span>Checks truck boundary, overlap, weight, stacking, and support ratio.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="engine-note">
+              Output: 3D cargo map, utilization score, trip estimate, and printable loading guide.
+            </div>
+          </div>
+
+          <div class="card summary-card">
+            <div class="section-head">
+              <h3>Session summary</h3>
+              <p>Live operational calculation.</p>
+            </div>
+
+            <div class="summary-row">
+              <span>Total items</span>
+              <strong id="summaryItems">0</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Total volume</span>
+              <strong id="summaryVolume">0.00 m³</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Total weight</span>
+              <strong id="summaryWeight">0 kg</strong>
+            </div>
+
+            <div class="summary-row">
+              <span>Selected vehicle</span>
+              <strong id="summaryVehicle">-</strong>
+            </div>
+
+            <div class="capacity-box">
+              <div>
+                <span>Estimated fill before AI</span>
+                <strong id="fillPercent">0%</strong>
+              </div>
+
+              <div class="bar-track">
+                <div id="fillBar" class="bar-fill"></div>
+              </div>
+            </div>
+
+            <button class="btn btn-primary optimize-btn" onclick="optimizeSession()">
+              Run PackWise AI Engine
+            </button>
+          </div>
+
+          <div class="card item-list-card">
+            <div class="section-head">
+              <h3>Cargo list</h3>
+              <p>Items prepared for optimization.</p>
+            </div>
+
+            <div id="cargoList" class="cargo-list">
+              <div class="empty-state">No cargo items added yet.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="data/fleet.js"></script>
+  <script src="data/products.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    protectPage(["operator"]);
+    renderSidebar("session");
+    renderSidebarUser();
+  </script>
+  <script src="js/algorithm.js"></script>
+  <script src="js/session.js"></script>
+</body>
+</html>

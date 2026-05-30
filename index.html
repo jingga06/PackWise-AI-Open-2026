@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PackWise — Dashboard</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="logo">Pack<span>Wise</span></div>
+
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link active">Dashboard</a>
+        <a href="fleet.html" class="nav-link active">Fleet Database</a>
+        <a href="visualize.html" class="nav-link">3D Visual</a>
+        <a href="guide.html" class="nav-link">Loading Guide</a>
+      </nav>
+
+      <div id="sidebarUser" class="sidebar-user"></div>
+      <button class="sidebar-logout" onclick="logout()">Logout</button>
+    </aside>
+
+    <main class="main-content">
+      <header class="page-title">
+        <div>
+          <div class="badge">● AI Fleet Space Optimization</div>
+          <h1>Fleet utilization dashboard</h1>
+          <p>Monitor loading efficiency, truck space usage, saved trips, and historical optimization performance.</p>
+        </div>
+
+        <div class="header-actions">
+          <button class="btn btn-ghost" onclick="loadDemoData()">
+            Load Demo Data
+          </button>
+
+          <button class="btn btn-primary" onclick="goTo('session.html')">
+            + New Loading Session
+          </button>
+        </div>
+      </header>
+
+      <section class="kpi-grid">
+        <div class="kpi-card card">
+          <p>Today's Shipments</p>
+          <h2 id="todayShipments">0</h2>
+          <span>Sessions created today</span>
+        </div>
+
+        <div class="kpi-card card">
+          <p>Average Utilization</p>
+          <h2 id="avgUtil">0%</h>
+          <span>Target: 80–85%</span>
+        </div>
+
+        <div class="kpi-card card">
+          <p>Estimated Cost Saved</p>
+          <h2 id="costSaved">Rp0</h2>
+          <span>Based on reduced trips</span>
+        </div>
+
+        <div class="kpi-card card">
+          <p>Best Utilization</p>
+          <h2 id="bestUtil">0%</h2>
+          <span>Highest recorded session</span>
+        </div>
+      </section>
+
+      <section class="dashboard-grid">
+        <div class="card chart-card">
+          <div class="section-head">
+            <h3>Utilization trend</h3>
+            <p>Historical loading efficiency per session</p>
+          </div>
+          <canvas id="utilChart"></canvas>
+        </div>
+
+        <div class="card chart-card small-chart-card">
+          <div class="section-head">
+            <h3>Vehicle usage breakdown</h3>
+            <p>Truck selection frequency</p>
+          </div>
+          <canvas id="vehicleChart"></canvas>
+        </div>
+      </section>
+
+      <section class="dashboard-grid">
+        <div class="card sessions-card">
+          <div class="section-head">
+            <h3>Recent loading sessions</h3>
+            <p>Saved optimization results from warehouse operations</p>
+          </div>
+
+          <div id="sessionList" class="session-list">
+            <div class="empty-state">No loading sessions saved yet.</div>
+          </div>
+        </div>
+
+        <div class="card insight-card">
+          <div class="section-head">
+            <h3>AI operational insight</h3>
+            <p>Recommendation based on utilization pattern</p>
+          </div>
+
+          <div id="aiInsight" class="insight-box">
+            No sessions yet. Create a loading session to generate insights.
+          </div>
+
+          <button class="btn btn-ghost" onclick="goTo('session.html')">
+            Start optimization
+          </button>
+        </div>
+      </section>
+
+      <section class="card sessions-card">
+        <div class="section-head">
+          <h3>Recent loading sessions</h3>
+          <p>Saved optimization results from warehouse operations</p>
+        </div>
+
+        <div id="sessionList" class="session-list">
+          <div class="empty-state">No loading sessions saved yet.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <script src="data/fleet.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    protectPage(["manager"]);
+    renderSidebarUser();
+  </script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
