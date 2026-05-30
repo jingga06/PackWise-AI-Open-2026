@@ -184,7 +184,7 @@ No build tools or server required. Open directly in a browser:
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/packwise.git
+git clone https://github.com/jingga06/packwise.git
 cd packwise
 
 # Open in browser
