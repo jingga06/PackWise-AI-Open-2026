@@ -1,4 +1,4 @@
-# PackWise — AI Fleet Space Optimization
+# PackWise - AI Fleet Space Optimization
 
 > **AI Open Innovation Challenge 2026** · Team Oops.exe · PT. Kawan Lama Solution · Case 2: Smart Logistics
 
@@ -56,13 +56,13 @@ PackWise fixes this with a two-phase optimization engine and makes the result im
 
 PackWise runs a **two-phase optimization** on every session:
 
-### Phase 1 — First Fit Decreasing (FFD)
+### Phase 1First Fit Decreasing (FFD)
 Items are sorted by volume from largest to smallest, then placed one by one into the virtual cargo space. For each item, PackWise tries all 6 valid rotation orientations and finds the first valid position using a candidate point list (corner-based placement strategy). A position is valid only if:
 - The item fits within vehicle boundaries
 - It does not overlap any already-placed item
 - If elevated, it has ≥ 55% surface area support from boxes below
 
-### Phase 2 — Genetic Algorithm-style Refinement
+### Phase 2Genetic Algorithm-style Refinement
 PackWise generates 17 candidate arrangements by varying item order across different sorting strategies (volume, weight, height, length, width) and randomized priority shuffles. Each candidate is scored by a fitness function that weighs space utilization, packed item count, weight balance, and unpacked item penalty. The highest-scoring arrangement is selected as the final output.
 
 **Why Genetic Algorithm over Reinforcement Learning?** GA produces useful results without historical training data — critical for a fresh deployment where no prior optimized loading records exist. Physical constraints (weight limits, stacking support ratios) are encoded directly into the fitness function, making every output safe and interpretable for warehouse staff.
@@ -203,7 +203,7 @@ open login.html
 | Average fleet utilization | ~60–75% (manual) | ~80–85% (optimized) |
 | Loading decision basis | Worker intuition | Algorithm output |
 | Historical data available | None | Per-session dashboard |
-| Logistics cost reduction | — | Projected 10–20% |
+| Logistics cost reduction | - | Projected 10–20% |
 
 Based on benchmark improvements reported in 3D bin packing optimization literature (Martello, Pisinger & Vigo, 2000).
 
