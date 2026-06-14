@@ -8,9 +8,9 @@ PackWise is a web-based Information System that solves a real operational proble
 
 ## The Problem
 
-PT. Kawan Lama Solution handles hundreds of daily shipments across Indonesia. Warehouse crews arrange cargo manually, based on habit and personal judgment. The result: trucks regularly depart at 60–75% capacity, wasting fuel costs and vehicle hours on trips that didn't need to happen.
+PT. Kawan Lama Solution handles hundreds of daily shipments across Indonesia. Warehouse crews arrange cargo manually, based on habit and personal judgment. The result: trucks regularly depart at 60-75% capacity, wasting fuel costs and vehicle hours on trips that didn't need to happen.
 
-PackWise fixes this with a two-phase optimization engine and makes the result immediately usable by any warehouse worker — no data science background required.
+PackWise fixes this with a two-phase optimization engine and makes the result immediately usable by any warehouse worker - no data science background required.
 
 ---
 
@@ -32,23 +32,23 @@ PackWise fixes this with a two-phase optimization engine and makes the result im
 ## Features
 
 ### For Warehouse Operators
-- **New Loading Session** — create a shipment session with date, route, and notes
-- **Product Database Input** — select items by SKU from the built-in product catalogue (PT. Kawan Lama Solution SKU format)
-- **Manual Item Input** — add custom items by entering dimensions and weight directly
-- **Vehicle Selection** — choose from the fleet database (Box Truck S / M / L)
-- **AI Optimization Engine** — runs First Fit Decreasing + Genetic Algorithm-style refinement
-- **3D Cargo Visualization** — interactive Three.js render showing exact placement of every item inside the truck
-- **Box Inspection** — click any box in the 3D view to see its item name, SKU, dimensions, and rotation
-- **Utilization Report** — space utilization %, unused volume, trips needed, estimated trips saved vs. manual loading
-- **AI Recommendation** — auto-generated plain-language advice per session
-- **Printable Loading Guide** — step-by-step instruction list for the loading crew, formatted for print
+- **New Loading Session** - create a shipment session with date, route, and notes
+- **Product Database Input** - select items by SKU from the built-in product catalogue (PT. Kawan Lama Solution SKU format)
+- **Manual Item Input** - add custom items by entering dimensions and weight directly
+- **Vehicle Selection** - choose from the fleet database (Box Truck S / M / L)
+- **AI Optimization Engine** - runs First Fit Decreasing + Genetic Algorithm-style refinement
+- **3D Cargo Visualization** - interactive Three.js render showing exact placement of every item inside the truck
+- **Box Inspection** - click any box in the 3D view to see its item name, SKU, dimensions, and rotation
+- **Utilization Report** - space utilization %, unused volume, trips needed, estimated trips saved vs. manual loading
+- **AI Recommendation** - auto-generated plain-language advice per session
+- **Printable Loading Guide** - step-by-step instruction list for the loading crew, formatted for print
 
 ### For Logistics Managers
-- **Management Dashboard** — Chart.js charts for utilization trends, vehicle usage distribution, estimated cost saved
-- **Session History** — browse all past loading sessions with key metrics
-- **Fleet Database** — view vehicle specifications (internal dimensions, max weight)
-- **3D Visualization Access** — open saved 3D views from any past session
-- **Loading Guide Access** — review and reprint loading instructions from past sessions
+- **Management Dashboard** - Chart.js charts for utilization trends, vehicle usage distribution, estimated cost saved
+- **Session History** - browse all past loading sessions with key metrics
+- **Fleet Database** - view vehicle specifications (internal dimensions, max weight)
+- **3D Visualization Access** - open saved 3D views from any past session
+- **Loading Guide Access** - review and reprint loading instructions from past sessions
 
 ---
 
@@ -65,7 +65,7 @@ Items are sorted by volume from largest to smallest, then placed one by one into
 ### Phase 2Genetic Algorithm-style Refinement
 PackWise generates 17 candidate arrangements by varying item order across different sorting strategies (volume, weight, height, length, width) and randomized priority shuffles. Each candidate is scored by a fitness function that weighs space utilization, packed item count, weight balance, and unpacked item penalty. The highest-scoring arrangement is selected as the final output.
 
-**Why Genetic Algorithm over Reinforcement Learning?** GA produces useful results without historical training data — critical for a fresh deployment where no prior optimized loading records exist. Physical constraints (weight limits, stacking support ratios) are encoded directly into the fitness function, making every output safe and interpretable for warehouse staff.
+**Why Genetic Algorithm over Reinforcement Learning?** GA produces useful results without historical training data - critical for a fresh deployment where no prior optimized loading records exist. Physical constraints (weight limits, stacking support ratios) are encoded directly into the fitness function, making every output safe and interpretable for warehouse staff.
 
 ---
 
